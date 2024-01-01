@@ -7,9 +7,9 @@ import { createPosts, updatePost } from "../../actions/posts";
 
 const Form = ({ currentId, setCurrentId }) => {
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem("profile"));
 
   const [postData, setPostData] = useState({
-    creator: "",
     title: "",
     message: "",
     tags: "",
@@ -38,10 +38,12 @@ const Form = ({ currentId, setCurrentId }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (currentId) {
-      dispatch(updatePost(currentId, postData));
+      dispatch(
+        updatePost(currentId, { ...postData, name: user?.result?.name })
+      );
       clear();
     } else {
-      dispatch(createPosts(postData));
+      dispatch(createPosts({ ...postData, name: user?.result?.name }));
       clear();
     }
     setPostData({
@@ -52,6 +54,16 @@ const Form = ({ currentId, setCurrentId }) => {
       selectedFile: "",
     });
   };
+
+  if (!user?.result?.name) {
+    return (
+      <Paper className={styles.paper}>
+        <Typography variant="h6" align="center">
+          Please Sign In to create and like posts.
+        </Typography>
+      </Paper>
+    );
+  }
 
   return (
     <Paper className={styles.paper}>

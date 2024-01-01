@@ -1,11 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
 import { Provider } from "react-redux";
-import reducers from "./reducers";
-import "./index.css";
 import { configureStore } from "@reduxjs/toolkit";
 import { thunk } from "redux-thunk";
+import { BrowserRouter } from "react-router-dom";
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import App from "./App";
+import reducers from "./reducers";
+import "./index.css";
 
 const store = configureStore({
   reducer: reducers,
@@ -15,7 +17,11 @@ const store = configureStore({
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <GoogleOAuthProvider clientId="903477557908-c3tl6la33poup82ouj7hfp0f9l5s3kea.apps.googleusercontent.com">
+          <App />
+        </GoogleOAuthProvider>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 );

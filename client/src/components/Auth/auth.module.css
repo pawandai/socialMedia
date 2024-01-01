@@ -1,0 +1,28 @@
+.paper {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2px;
+}
+.inputContainer {
+  display: grid;
+  gap: 10px !important;
+}
+.root {
+  margin: 1px;
+}
+.avatar {
+  margin: 1px;
+  background-color: rgb(9, 9, 125);
+}
+.form {
+  width: '100%';
+  margin-top: 3px;
+}
+.submit {
+  margin: 3px 0 2px;
+}
+.googleButton {
+  margin-bottom: 2px;
+}
